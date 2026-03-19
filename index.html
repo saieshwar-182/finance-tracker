@@ -10,22 +10,28 @@
     <h1>💰 Finance Tracker</h1>
 
     <div class="summary">
-        <h3>Balance: ₹ <span id="balance">0</span></h3>
-        <p>Income: ₹ <span id="income">0</span></p>
-        <p>Expense: ₹ <span id="expense">0</span></p>
+        <div class="card balance">
+            <h3>Balance</h3>
+            <p>₹ <span id="balance">0</span></p>
+        </div>
+
+        <div class="card income">
+            <h3>Income</h3>
+            <p>₹ <span id="income">0</span></p>
+        </div>
+
+        <div class="card expense">
+            <h3>Expense</h3>
+            <p>₹ <span id="expense">0</span></p>
+        </div>
     </div>
 
     <form id="transaction-form">
         <input type="text" id="description" placeholder="Description" required>
-        <input type="number" id="amount" placeholder="Amount (+income, -expense)" required>
-        <button type="submit">Add</button>
+        <input type="number" id="amount" placeholder="Amount (+/-)" required>
+        <input type="date" id="date" required>
+        <button type="submit">Add Transaction</button>
     </form>
-
-    <div class="filters">
-        <button onclick="filterTransactions('all')">All</button>
-        <button onclick="filterTransactions('income')">Income</button>
-        <button onclick="filterTransactions('expense')">Expense</button>
-    </div>
 
     <ul id="transaction-list"></ul>
 </div>
