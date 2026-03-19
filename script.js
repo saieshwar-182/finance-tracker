@@ -1,56 +1,73 @@
-body {
-    font-family: Arial;
-    background: #f4f4f4;
+const form = document.getElementById("transaction-form");
+const list = document.getElementById("transaction-list");
+
+const balanceEl = document.getElementById("balance");
+const incomeEl = document.getElementById("income");
+const expenseEl = document.getElementById("expense");
+
+let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+
+let currentFilter = "all";
+
+function updateUI() {
+    list.innerHTML = "";
+
+    let balance = 0;
+    let income = 0;
+    let expense = 0;
+
+    transactions.forEach((t, index) => {
+        const amount = Number(t.amount);
+
+        balance += amount;
+        if (amount > 0) income += amount;
+        else expense += amount;
+
+        if (
+            currentFilter === "all" ||
+            (currentFilter === "income" && amount > 0) ||
+            (currentFilter === "expense" && amount < 0)
+        ) {
+            const li = document.createElement("li");
+
+            li.innerHTML = `
+                <span class="${amount > 0 ? 'income' : 'expense'}">
+                    ${t.description} : ₹ ${amount}
+                </span>
+                <button class="delete-btn" onclick="deleteTransaction(${index})">X</button>
+            `;
+
+            list.appendChild(li);
+        }
+    });
+
+    balanceEl.textContent = balance;
+    incomeEl.textContent = income;
+    expenseEl.textContent = Math.abs(expense);
+
+    localStorage.setItem("transactions", JSON.stringify(transactions));
 }
 
-.container {
-    width: 400px;
-    margin: 50px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const description = document.getElementById("description").value;
+    const amount = document.getElementById("amount").value;
+
+    transactions.push({ description, amount });
+
+    form.reset();
+    updateUI();
+});
+
+function deleteTransaction(index) {
+    transactions.splice(index, 1);
+    updateUI();
 }
 
-h1 {
-    text-align: center;
+function filterTransactions(type) {
+    currentFilter = type;
+    updateUI();
 }
 
-.summary {
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-form input, button {
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-}
-
-button {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.income {
-    color: green;
-}
-
-.expense {
-    color: red;
-}
-
-li {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px;
-    border-bottom: 1px solid #ddd;
-}
-
-.delete-btn {
-    background: red;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
+updateUI();
