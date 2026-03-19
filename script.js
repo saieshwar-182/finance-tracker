@@ -1,35 +1,56 @@
-const form = document.getElementById("transaction-form");
-const list = document.getElementById("transaction-list");
-const balanceEl = document.getElementById("balance");
-
-let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-
-function updateUI() {
-    list.innerHTML = "";
-    let total = 0;
-
-    transactions.forEach((t, index) => {
-        total += Number(t.amount);
-
-        const li = document.createElement("li");
-        li.textContent = `${t.description} : ₹ ${t.amount}`;
-        list.appendChild(li);
-    });
-
-    balanceEl.textContent = total;
-    localStorage.setItem("transactions", JSON.stringify(transactions));
+body {
+    font-family: Arial;
+    background: #f4f4f4;
 }
 
-form.addEventListener("submit", function(e) {
-    e.preventDefault();
+.container {
+    width: 400px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
 
-    const description = document.getElementById("description").value;
-    const amount = document.getElementById("amount").value;
+h1 {
+    text-align: center;
+}
 
-    transactions.push({ description, amount });
+.summary {
+    text-align: center;
+    margin-bottom: 15px;
+}
 
-    form.reset();
-    updateUI();
-});
+form input, button {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+}
 
-updateUI();
+button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.income {
+    color: green;
+}
+
+.expense {
+    color: red;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.delete-btn {
+    background: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
