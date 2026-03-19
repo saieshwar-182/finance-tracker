@@ -6,22 +6,35 @@
 </head>
 <body>
 
-    <div class="container">
-        <h1>Finance Tracker</h1>
+<div class="container">
+    <h1>💰 Finance Tracker</h1>
 
-        <div class="balance">
-            <h2>Balance: ₹ <span id="balance">0</span></h2>
+    <div class="summary">
+        <div class="card balance">
+            <h3>Balance</h3>
+            <p>₹ <span id="balance">0</span></p>
         </div>
 
-        <form id="transaction-form">
-            <input type="text" id="description" placeholder="Description" required>
-            <input type="number" id="amount" placeholder="Amount (+income, -expense)" required>
-            <button type="submit">Add Transaction</button>
-        </form>
+        <div class="card income">
+            <h3>Income</h3>
+            <p>₹ <span id="income">0</span></p>
+        </div>
 
-        <h3>Transactions</h3>
-        <ul id="transaction-list"></ul>
+        <div class="card expense">
+            <h3>Expense</h3>
+            <p>₹ <span id="expense">0</span></p>
+        </div>
     </div>
+
+    <form id="transaction-form">
+        <input type="text" id="description" placeholder="Description" required>
+        <input type="number" id="amount" placeholder="Amount (+/-)" required>
+        <input type="date" id="date" required>
+        <button type="submit">Add Transaction</button>
+    </form>
+
+    <ul id="transaction-list"></ul>
+</div>
 
 <script src="script.js"></script>
 </body>

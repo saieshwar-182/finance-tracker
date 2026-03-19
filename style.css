@@ -1,6 +1,7 @@
 body {
     font-family: Arial;
-    background: #f4f4f4;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    margin: 0;
 }
 
 .container {
@@ -8,22 +9,63 @@ body {
     margin: 50px auto;
     background: white;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
 
 h1 {
     text-align: center;
 }
 
+.summary {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.card {
+    width: 30%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+}
+
+.balance { background: #333; }
+.income { background: green; }
+.expense { background: red; }
+
 form input, button {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     margin: 5px 0;
+    border-radius: 5px;
+    border: none;
 }
 
 button {
-    background: #4CAF50;
+    background: #333;
+    color: white;
+    cursor: pointer;
+}
+
+li {
+    background: #f4f4f4;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.income-text { color: green; }
+.expense-text { color: red; }
+
+.delete-btn {
+    background: red;
     color: white;
     border: none;
+    padding: 5px;
     cursor: pointer;
 }
