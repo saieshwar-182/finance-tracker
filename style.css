@@ -15,6 +15,11 @@ h1 {
     text-align: center;
 }
 
+.summary {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
 form input, button {
     width: 100%;
     padding: 8px;
@@ -23,6 +28,28 @@ form input, button {
 
 button {
     background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.income {
+    color: green;
+}
+
+.expense {
+    color: red;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.delete-btn {
+    background: red;
     color: white;
     border: none;
     cursor: pointer;
