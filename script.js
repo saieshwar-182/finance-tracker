@@ -63,5 +63,3 @@ function deleteTransaction(index) {
     transactions.splice(index, 1);
     updateUI();
 }
-
-updateUI();
