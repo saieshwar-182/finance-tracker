@@ -7,8 +7,6 @@ const expenseEl = document.getElementById("expense");
 
 let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
-let currentFilter = "all";
-
 function updateUI() {
     list.innerHTML = "";
 
@@ -23,22 +21,22 @@ function updateUI() {
         if (amount > 0) income += amount;
         else expense += amount;
 
-        if (
-            currentFilter === "all" ||
-            (currentFilter === "income" && amount > 0) ||
-            (currentFilter === "expense" && amount < 0)
-        ) {
-            const li = document.createElement("li");
+        const li = document.createElement("li");
 
-            li.innerHTML = `
-                <span class="${amount > 0 ? 'income' : 'expense'}">
-                    ${t.description} : ₹ ${amount}
+        li.innerHTML = `
+            <div>
+                <strong>${t.description}</strong><br>
+                <small>${t.date}</small>
+            </div>
+            <div>
+                <span class="${amount > 0 ? 'income-text' : 'expense-text'}">
+                    ₹ ${amount}
                 </span>
                 <button class="delete-btn" onclick="deleteTransaction(${index})">X</button>
-            `;
+            </div>
+        `;
 
-            list.appendChild(li);
-        }
+        list.appendChild(li);
     });
 
     balanceEl.textContent = balance;
@@ -53,8 +51,9 @@ form.addEventListener("submit", function(e) {
 
     const description = document.getElementById("description").value;
     const amount = document.getElementById("amount").value;
+    const date = document.getElementById("date").value;
 
-    transactions.push({ description, amount });
+    transactions.push({ description, amount, date });
 
     form.reset();
     updateUI();
@@ -62,11 +61,6 @@ form.addEventListener("submit", function(e) {
 
 function deleteTransaction(index) {
     transactions.splice(index, 1);
-    updateUI();
-}
-
-function filterTransactions(type) {
-    currentFilter = type;
     updateUI();
 }
 
