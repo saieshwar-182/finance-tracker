@@ -17,14 +17,18 @@ function addEntry() {
   const amt  = parseFloat(document.getElementById('amtInput').value);
   const cat  = currentType === 'income' ? 'Income' : document.getElementById('catSelect').value;
   const note = document.getElementById('noteInput').value.trim() || cat;
+  const raw  = document.getElementById('dateInput').value;
 
   if (!amt || amt <= 0) { alert('Please enter a valid amount.'); return; }
 
-  const date = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+  const dateObj = raw ? new Date(raw) : new Date();
+  const date = dateObj.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+
   transactions.unshift({ type: currentType, cat, note, amt, date });
 
   document.getElementById('amtInput').value  = '';
   document.getElementById('noteInput').value = '';
+  document.getElementById('dateInput').value = '';
   render();
 }
 
