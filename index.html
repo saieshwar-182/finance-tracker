@@ -1,41 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Finance Tracker</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
 
-<div class="container">
-    <h1>💰 Finance Tracker</h1>
-
+  <div class="header">
+    <h1>Expense Tracker</h1>
     <div class="summary">
-        <div class="card balance">
-            <h3>Balance</h3>
-            <p>₹ <span id="balance">0</span></p>
-        </div>
+      <div class="box green">
+        <span>Income</span>
+        <strong id="totalIncome">₹0</strong>
+      </div>
+      <div class="box red">
+        <span>Expense</span>
+        <strong id="totalExpense">₹0</strong>
+      </div>
+      <div class="box blue">
+        <span>Balance</span>
+        <strong id="balance">₹0</strong>
+      </div>
+    </div>
+  </div>
 
-        <div class="card income">
-            <h3>Income</h3>
-            <p>₹ <span id="income">0</span></p>
-        </div>
+  <div class="container">
 
-        <div class="card expense">
-            <h3>Expense</h3>
-            <p>₹ <span id="expense">0</span></p>
-        </div>
+    <div class="form-card">
+      <div class="toggle">
+        <button class="active expense" id="btnExpense" onclick="setType('expense')">− Expense</button>
+        <button id="btnIncome" onclick="setType('income')">+ Income</button>
+      </div>
+      <input type="number" id="amtInput" placeholder="Amount (₹)" />
+      <select id="catSelect">
+        <option value="Groceries">🛒 Groceries</option>
+        <option value="Rent">🏠 Rent</option>
+        <option value="Utilities">⚡ Utilities</option>
+        <option value="Health">💊 Health</option>
+        <option value="Travel">🚗 Travel</option>
+        <option value="Dining">🍽️ Dining</option>
+        <option value="Other">📦 Other</option>
+      </select>
+      <input type="text" id="noteInput" placeholder="Note (optional)" />
+      <button class="add-btn" onclick="addEntry()">Add Entry</button>
     </div>
 
-    <form id="transaction-form">
-        <input type="text" id="description" placeholder="Description" required>
-        <input type="number" id="amount" placeholder="Amount (+/-)" required>
-        <input type="date" id="date" required>
-        <button type="submit">Add Transaction</button>
-    </form>
+    <h2>Recent Transactions</h2>
+    <div id="txnList">
+      <p class="empty">No transactions yet.</p>
+    </div>
 
-    <ul id="transaction-list"></ul>
-</div>
+  </div>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
